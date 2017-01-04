@@ -1,6 +1,10 @@
 <?php
 
-require_once "app/config/config.php";
+if (!defined('ROOT')){
+    define('ROOT', __DIR__ . DIRECTORY_SEPARATOR);
+}
+
+require_once ROOT . "app/config/config.php";
 require_once ROOT . "app/models/database.php";
 require_once ROOT . "app/models/log_manager.php";
 require_once ROOT . "app/models/redis_manager.php";
