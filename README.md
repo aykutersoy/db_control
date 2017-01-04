@@ -1,4 +1,4 @@
-# LiveLoad Database source control #
+# Database source control #
 
 Keep track of DB changes and be able to deploy
 
