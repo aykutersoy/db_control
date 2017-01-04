@@ -9,8 +9,8 @@ Keep track of DB changes and be able to deploy
 ### How do I get set up? ###
 
 * please make sure you have schema called db_control
-** and all the tables under {root}/Structure/db_control/Tables/*
+and all the tables under {root}/Structure/db_control/Tables/*
 
 * cp {root}/app/credentials/credentials.template {root}/app/credentials/credentials
-** change the right credentials to connect
+change the right credentials to connect
 
