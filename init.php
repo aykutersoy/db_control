@@ -109,7 +109,7 @@ class Initiate {
     }
     private function ignoredDBS($schemas) {
         
-        if ($schemas != 'information_schema' && $schemas != 'mysql' && $schemas != 'performance_schema' && $schemas != 'sys' && $schemas != 'db_control') {
+        if ($schemas != 'information_schema' && $schemas != 'mysql' && $schemas != 'performance_schema' && $schemas != 'sys') {
             return TRUE;
         } else {
             return FALSE;
