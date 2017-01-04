@@ -1,29 +1,13 @@
-# README #
+# Database Source Control #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Keep track of DB changes and be able to deploy
 
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* This project will help us to keep track DB changes and to be able to deploy them into relevant DB
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* cp {root}/app/credentials/credentials.template {root}/app/credentials/credentials
+* change the right credentials to connect
 
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
