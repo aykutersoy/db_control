@@ -1,71 +1,92 @@
 # Database source control #
 
-Keep track of DB changes and be able to deploy
+*Keep track of DB changes and be able to deploy*
 
 ## What is this repository for? ##
 
-- This project will help us to keep track DB changes and to be able to deploy them into relevant DB
+- *This project will help us to keep track DB changes and to be able to deploy them into relevant DB*
 
 ## How do I get set up? ##
 
-- Make sure you have a schema called db_control with all the tables under [root]/Structure/db_control/Tables/
+- *Run setup script.*
 
-- Copy temp credentials file and enter the right db connection details
-```
-#!bash
-$ cp [root]/app/credentials/credentials.template [root]/app/credentials/credentials
+- *This will*
+  - *Create DB called db_control along with two tables, logs and migration*
+  - *Copies template files to actual files*
+
+
+```sh
+$ php setup.php
 
 ```
+
+- *Please make sure you entered the right db connection details credentials file*
 
 
 ## How does it work? ##
 
-### Initiation ###
+#### Initiation ####
 
-* After cloned the project to local and completed the set up run init file
+- *After cloned the project to local and completed the set up run init file*
 
-```
-#!bash
+```sh
 $ php init.php
 
 ```
 
-* Once initiation completed commit the new files and push it repo
+- *Once initiation completed commit the new files and push it repo*
 
-* Initiation should create File structure as follows
-* - [root]/Structure/EP_TX_DATA/Functions/Function1.sql
-* - [root]/Structure/EP_TX_DATA/Procedures/Procedure1.sql
-* - [root]/Structure/EP_TX_DATA/Tables/Table1.sql
-* - [root]/Structure/EP_TX_DATA/Triggers/Trigger1.sql
-* - [root]/Structure/EP_TX_DATA/Events/Trigger1.sql
-* - [root]/Structure/EP_TX_DATA/Views/Trigger1.sql
-
-
-### Migration ###
-
-* To migrate changes to relevant DBs run migrate file
+- *Initiation should create File structure as follows*
+  - [root]/Structure/EP_TX_DATA/Functions/Function1.sql
+  - [root]/Structure/EP_TX_DATA/Procedures/Procedure1.sql
+  - [root]/Structure/EP_TX_DATA/Tables/Table1.sql
+  - [root]/Structure/EP_TX_DATA/Triggers/Trigger1.sql
+  - [root]/Structure/EP_TX_DATA/Events/Trigger1.sql
+  - [root]/Structure/EP_TX_DATA/Views/Trigger1.sql
 
 
-```
-#!bash
+#### Migration ####
+
+- *To migrate changes to relevant DBs run migrate file*
+
+
+```sh
 $ php migrate.php
 
 ```
 
-* What this does it finds out the latest changes to git repo and executes the changed Stored Procedure (for now)
-* At first it compares latest commit with the previous one, after the first migration it will compare whatever has been written into DB and with latest commit in git repo
-* If the Stored Procedure was already exist it backs up under **"_BACKUP"** directory in case if execution fails it revert back to what it was before
+- *What this does is finds out the latest changes to git repo and executes the changed Stored Procedure (for now)*
+- *At first it compares latest commit with the previous one, after the first migration it will compare whatever has been written into DB and with latest commit in git repo*
+- *If the Stored Procedure was already exist it backs up under __"_BACKUP"__ directory in case if execution fails it revert back to what it was before*
 
-###How to add new files?###
+####How to ignore certaion DBs?####
 
-* File name has to be the exactly same as the Stored Procedure name and it should end with **".sql"** file extension
+- *add new DBs if necessary to ignoredDBs file, it should look like as follow*
+
+```json
+{
+    "ignoredDBs" :
+    [
+        "information_schema",
+        "mysql",
+        "performance_schema",
+        "sys",
+        "db_control"
+    ]
+}
+
 
 ```
-#!bash
+
+####How to add new files?####
+
+- *File name has to be the exactly same as the Stored Procedure name and it should end with __".sql"__ file extension*
+
+```sh
 eg. Fees.sql
 
 ```
 
 ## Notes ##
 
-** PLEASE NOTE THIS IS ONLY FOR STORED PROCEDURE FOR NOW, THE REST WILL FOLLOW**
+__PLEASE NOTE THIS IS ONLY FOR STORED PROCEDURE FOR NOW, THE REST WILL FOLLOW__
