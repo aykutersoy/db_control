@@ -113,10 +113,17 @@ class Initiate {
     }
     private function ignoredDBS($schemas) {
         
-        if ($schemas != 'information_schema' && $schemas != 'mysql' && $schemas != 'performance_schema' && $schemas != 'sys') {
-            return TRUE;
-        } else {
+        $file = ROOT . "ignoredDBs";
+        $templateFile = ROOT . "ignoredDBs.template";
+        if (!file_exists($file)){
+            copy($templateFile, $file);
+        }
+        $ignoredDBs = json_decode(file_get_contents($file))->ignoredDBs;
+        
+        if (in_array($schemas, $ignoredDBs)) {
             return FALSE;
+        } else {
+            return TRUE;
         }
     }
     
