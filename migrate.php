@@ -37,14 +37,15 @@ class Migrate {
         $this->getLatestCommitFromGit();
         
         if ($this->dbCommit == $this->gitCommit) {
-            echo "\n**********************************************************\n\n"
+            exit("\n**********************************************************\n\n"
                 . "This commit \n\n"
                 . "$this->gitCommit\n\n"
                 . "has already been migrated.\n"
                 . "Aborting...\n\n"
-                . "**********************************************************\n";
-            return false;
+                . "**********************************************************\n");
         }
+
+        $this->confirm();
         
         foreach ($this->findChanges() as $singleChange) {
             
@@ -79,6 +80,8 @@ class Migrate {
                         break;
                 }
                 $this->log(isset($rs['StatusCode']) ? $rs['StatusCode'] : '000', isset($rs['StatusDesc']) ? $rs['StatusDesc'] : 'Success');
+            } else {
+                echo "Not a SQL file" . PHP_EOL;
             }
         }
         $this->setLatestCommitToDB();
@@ -93,6 +96,24 @@ class Migrate {
 
         return explode(PHP_EOL, trim(shell_exec($gitCommand)));
         
+    }
+    private function confirm() {
+
+        echo "These are the change(s) has/have been made:\n\n"
+            . "**********************************************************\n";
+        foreach ($this->findChanges() as $value) {
+            echo $value . PHP_EOL;
+        }
+        echo "**********************************************************\n"
+            . "\nAre you sure you want to migrate all of these?"
+            . "\nType 'yes' to continue: ";
+        
+        $handle = fopen("php://stdin","r");
+        $line = fgets($handle);
+        
+        if(trim($line) != 'yes'){
+            exit("ABORTING!\n");
+        }
     }
 
     private function procedures() {
