@@ -28,6 +28,8 @@ class Setup {
     }
     public function index() {
         
+        $this->copyTemplateFiles();
+        
         $createSchema = $this->createSchema();
         if ($createSchema === TRUE || strpos($createSchema, "exists") != FALSE) {
             
@@ -56,6 +58,21 @@ class Setup {
             echo "Setup has completed!!! \n";
         }
 
+    }
+    
+    private function copyTemplateFiles() {
+        
+        $files = array(
+            ROOT . "ignoredDBs",
+            ROOT . "app/credentials/credentials");
+        
+        foreach ($files as $path) {
+            
+            if (!file_exists($path)) {
+                copy($path . ".template", $path);
+                echo "$path.template file has been copied as $path";
+            }
+        }
     }
     
     private function createSchema() {
