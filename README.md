@@ -25,7 +25,7 @@ $ php setup.php
 
 ## How does it work? ##
 
-#### Initiation ####
+### Initiation ###
 
 - *After cloned the project to local and completed the set up run init file*
 
@@ -45,7 +45,11 @@ $ php init.php
   - [root]/Structure/EP_TX_DATA/Views/Trigger1.sql
 
 
-#### Migration ####
+- __*Initiation script can be run anytime that will bring the latest changes from DB into project*__
+  - For instance, you have done changes directly into DB and concluded the development this initiation will bring the changes what you have done.
+
+
+### Migration ###
 
 - *To migrate changes to relevant DBs run migrate file*
 
@@ -59,7 +63,7 @@ $ php migrate.php
 - *At first it compares latest commit with the previous one, after the first migration it will compare whatever has been written into DB and with latest commit in git repo*
 - *If the Stored Procedure was already exist it backs up under __"_BACKUP"__ directory in case if execution fails it revert back to what it was before*
 
-####How to ignore certaion DBs?####
+###How to ignore certaion DBs?###
 
 - *add new DBs if necessary to ignoredDBs file, it should look like as follow*
 
@@ -78,7 +82,7 @@ $ php migrate.php
 
 ```
 
-####How to add new files?####
+###How to add new files?###
 
 - *File name has to be the exactly same as the Stored Procedure name and it should end with __".sql"__ file extension*
 
