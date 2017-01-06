@@ -114,9 +114,8 @@ class Initiate {
     private function ignoredDBS($schemas) {
         
         $file = ROOT . "ignoredDBs";
-        $templateFile = ROOT . "ignoredDBs.template";
         if (!file_exists($file)){
-            copy($templateFile, $file);
+            copy($file . ".template", $file);
         }
         $ignoredDBs = json_decode(file_get_contents($file))->ignoredDBs;
         
@@ -140,8 +139,49 @@ class Initiate {
         $this->dirCheckAndMake($path);
         $fileFullPath = ROOT . $path . DIRECTORY_SEPARATOR . $fileName . ".sql";
         if (!file_exists($fileFullPath)) {
-            return file_put_contents($fileFullPath, $content);
+            file_put_contents($fileFullPath, $this->changeEOL($content));
+        } else {
+            $TMPfile = ROOT . "_TMP" . DIRECTORY_SEPARATOR . $fileName . ".sql";
+            file_put_contents($TMPfile, $this->changeEOL($content));
+            
+            if (file_exists($TMPfile) && $this->filesAreEqual($fileFullPath, $TMPfile) === FALSE) {
+
+                file_put_contents($fileFullPath, $this->changeEOL($content));
+            } 
+            unlink($TMPfile);
         }
+    }
+    private function changeEOL($content) {
+        
+        return preg_replace("/(?<=[^\r]|^)\n/", "\r\n", $content);
+    }
+    private function filesAreEqual($file1, $file2) {
+
+        // Check if filesize is different
+        if(filesize($file1) !== filesize($file2)) {
+            return FALSE;
+        }
+        // Check if content is different
+        $file1H = fopen($file1, 'rb');
+        $file2H = fopen($file2, 'rb');
+
+        // Check if fopen was successful
+        if ($file1H === FALSE || $file2H === FALSE) {
+            return FALSE;
+        }
+
+        $result = true;
+        while(!feof($file1H)) {
+            if(fread($file1H, filesize($file1)) != fread($file2H, filesize($file2))) {
+                $result = FALSE;
+                break;
+            }
+        }
+
+        fclose($file1H);
+        fclose($file2H);
+
+        return $result;
     }
 }
 
