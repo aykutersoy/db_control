@@ -37,12 +37,12 @@ $ php init.php
 - *Once initiation completed commit the new files and push it repo*
 
 - *Initiation should create File structure as follows*
-  - [root]/Structure/EP_TX_DATA/Functions/Function1.sql
-  - [root]/Structure/EP_TX_DATA/Procedures/Procedure1.sql
-  - [root]/Structure/EP_TX_DATA/Tables/Table1.sql
-  - [root]/Structure/EP_TX_DATA/Triggers/Trigger1.sql
-  - [root]/Structure/EP_TX_DATA/Events/Trigger1.sql
-  - [root]/Structure/EP_TX_DATA/Views/Trigger1.sql
+  - .../Structure/{DB_NAME}/Functions/Function1.sql
+  - .../Structure/{DB_NAME}/Procedures/Procedure1.sql
+  - .../Structure/{DB_NAME}/Tables/Table1.sql
+  - .../Structure/{DB_NAME}/Triggers/Trigger1.sql
+  - .../Structure/{DB_NAME}/Events/Trigger1.sql
+  - .../Structure/{DB_NAME}/Views/Trigger1.sql
 
 
 - __*Initiation script can be run anytime that will bring the latest changes from DB into project*__

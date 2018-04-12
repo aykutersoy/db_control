@@ -6,8 +6,6 @@ if (!defined('ROOT')){
 
 require_once ROOT . "app/config/config.php";
 require_once ROOT . "app/models/database.php";
-require_once ROOT . "app/models/log_manager.php";
-require_once ROOT . "app/models/redis_manager.php";
 
 
 $init = new Initiate('Default');

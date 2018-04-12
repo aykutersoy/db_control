@@ -46,7 +46,7 @@ class Database {
     private function __clone() {
         
     }
-    public function getDbConfig($db){
+    private function getDbConfig($db){
 
         // set these default values in case file doesn't exist or db config
         $this->dbHost = DB_HOST;
